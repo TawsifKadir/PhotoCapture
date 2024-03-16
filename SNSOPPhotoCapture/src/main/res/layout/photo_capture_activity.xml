@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PhotoCaptureActivity"
+    android:orientation="vertical">
+
+    <com.kit.photocapture.PhotoCaptureView
+        android:id="@+id/faisal_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="top|center"
+        app:show_fps="true"
+        />
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|left"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/baseline_close_24"
+        android:background="@drawable/round_button_cancel"
+        android:text="Back" />
+
+    <ImageButton
+        android:id="@+id/captureBtn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/baseline_camera_24"
+        android:background="@drawable/round_button_capture"
+        android:text="Capture" />
+
+    <ImageButton
+        android:id="@+id/switchBtn"
+        android:src="@drawable/baseline_cameraswitch_24"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/round_button_switch" />
+
+</FrameLayout>

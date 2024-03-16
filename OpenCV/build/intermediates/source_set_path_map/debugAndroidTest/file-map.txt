@@ -1,0 +1,5 @@
+org.opencv.test.OpenCV-androidTest-0 F:\AndroidProjects\SNSOPPhotoCapture\OpenCV\build\generated\res\resValues\androidTest\debug
+org.opencv.test.OpenCV-mergeDebugAndroidTestResources-1 F:\AndroidProjects\SNSOPPhotoCapture\OpenCV\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+org.opencv.test.OpenCV-mergeDebugAndroidTestResources-2 F:\AndroidProjects\SNSOPPhotoCapture\OpenCV\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+org.opencv.test.OpenCV-merged_res-3 F:\AndroidProjects\SNSOPPhotoCapture\OpenCV\build\intermediates\merged_res\debugAndroidTest
+org.opencv.test.OpenCV-packaged_res-4 F:\AndroidProjects\SNSOPPhotoCapture\OpenCV\build\intermediates\packaged_res\debug
