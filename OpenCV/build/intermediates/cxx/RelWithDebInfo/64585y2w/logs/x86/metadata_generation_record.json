@@ -1,0 +1,41 @@
+[
+  {
+    "level_": 0,
+    "message_": "Start JSON generation. Platform version: 21 min SDK version: x86",
+    "file_": "E:\\SNSOPPhotoCapture\\OpenCV\\libcxx_helper\\CMakeLists.txt",
+    "tag_": "release|x86",
+    "diagnosticCode_": 0,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 3,
+    "message_": "expected buildFiles file \u0027F:\\AndroidProjects\\SNSOPPhotoCapture\\OpenCV\\libcxx_helper\\CMakeLists.txt\u0027 to exist",
+    "file_": "E:\\SNSOPPhotoCapture\\OpenCV\\.cxx\\RelWithDebInfo\\64585y2w\\x86\\android_gradle_build.json",
+    "tag_": "release|x86",
+    "diagnosticCode_": 1409,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  },
+  {
+    "level_": 3,
+    "message_": "expected buildTargetsCommandComponents command \u0027F:\\Android\\Sdk\\cmake\\3.22.1\\bin\\ninja.exe\u0027 to exist",
+    "file_": "E:\\SNSOPPhotoCapture\\OpenCV\\.cxx\\RelWithDebInfo\\64585y2w\\x86\\android_gradle_build.json",
+    "tag_": "release|x86",
+    "diagnosticCode_": 1410,
+    "memoizedIsInitialized": 1,
+    "unknownFields": {
+      "fields": {}
+    },
+    "memoizedSize": -1,
+    "memoizedHashCode": 0
+  }
+]

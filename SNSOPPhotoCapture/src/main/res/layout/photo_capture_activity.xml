@@ -15,41 +15,37 @@
         app:show_fps="true"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_gravity="bottom|left"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_gravity="bottom|left"
         android:layout_marginBottom="50dp"
-
-        android:background="@color/blue"
+        android:src="@drawable/baseline_close_24"
+        android:background="@drawable/round_button_cancel"
         android:text="Back" />
 
-    <Button
+    <ImageButton
         android:id="@+id/captureBtn"
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="70dp"
-
-
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="50dp"
-
-
-        android:background="@color/blue"
+        android:src="@drawable/baseline_camera_24"
+        android:background="@drawable/round_button_capture"
         android:text="Capture" />
 
-    <Button
+    <ImageButton
         android:id="@+id/switchBtn"
-        android:layout_width="100dp"
+        android:src="@drawable/baseline_cameraswitch_24"
+        android:layout_width="70dp"
         android:layout_height="70dp"
-
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@color/blue"
-        android:text="Switch" />
+        android:background="@drawable/round_button_switch" />
 
 </FrameLayout>
