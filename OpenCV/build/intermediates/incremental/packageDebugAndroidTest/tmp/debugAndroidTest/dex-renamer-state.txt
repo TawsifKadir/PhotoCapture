@@ -1,4 +1,4 @@
-#Sun Mar 17 00:55:26 BDT 2024
+#Sun Mar 17 01:23:24 BDT 2024
 base.0=F\:\\AndroidProjects\\SNSOPPhotoCapture\\OpenCV\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
 base.1=F\:\\AndroidProjects\\SNSOPPhotoCapture\\OpenCV\\build\\intermediates\\dex\\debugAndroidTest\\mergeLibDexDebugAndroidTest\\0\\classes.dex
 base.2=F\:\\AndroidProjects\\SNSOPPhotoCapture\\OpenCV\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex

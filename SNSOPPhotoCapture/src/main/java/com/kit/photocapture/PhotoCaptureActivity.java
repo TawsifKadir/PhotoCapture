@@ -129,7 +129,6 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
 
         super.onCreate(savedInstanceState);
 
-
         if (!OpenCVLoader.initDebug()) {
             if(PhotoCaptureActivity.isDebug)
                 Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
