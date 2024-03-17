@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SNSOPPhotoCapture</string>
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="lbl_set_profile_photo">Set profile image</string>
+    <string name="lbl_take_camera_picture">Take a picture</string>
 </resources>

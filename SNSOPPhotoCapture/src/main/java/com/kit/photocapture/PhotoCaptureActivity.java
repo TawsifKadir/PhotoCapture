@@ -1,5 +1,7 @@
 package com.kit.photocapture;
 
+
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,21 +35,27 @@ import org.opencv.imgproc.Imgproc;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AsyncNotedAppOp;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.hardware.camera2.CaptureResult;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
@@ -92,6 +100,8 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
     private int nowCameraIndex = CameraBridgeViewBase.CAMERA_ID_BACK;
 
     public static boolean isDebug = false;
+
+    private ComplianceResult mComplianceResult = null;
 
     public PhotoCaptureActivity() {
         if(PhotoCaptureActivity.isDebug)
@@ -216,6 +226,7 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
             });
         }
 
+        mComplianceResult = ComplianceResult.NOT_INITIALIZED;
 
         ///getPermissions();
     }
@@ -226,6 +237,7 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
         super.onPause();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
+        mComplianceResult = ComplianceResult.NOT_INITIALIZED;
     }
 
     @Override
@@ -241,6 +253,8 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
 //        }
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.enableView();
+
+        mComplianceResult = ComplianceResult.NOT_INITIALIZED;
     }
 
     @Override
@@ -325,10 +339,6 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                     Log.d(TAG, "Detector returned status " + status);
                 }
 
-               /*if(nowCameraIndex==CameraBridgeViewBase.CAMERA_ID_FRONT) {
-                    Core.flip(nowRgba, nowRgba, 1);
-                }*/
-
                 if (nowFaces.rows() == 1) {
                     return ComplianceResult.COMPLIED;
                 } else if (nowFaces.rows() > 1) {
@@ -336,6 +346,7 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                 } else if (nowFaces.rows() <= 0) {
                     return ComplianceResult.NO_FACE;
                 }
+
             }catch(Throwable t){
                 isError=true;
                 errorObject = t;
@@ -349,6 +360,7 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                 nowFaces.release();
                 mInputSize=null;
                 errorObject=null;
+
             }
 
         }
@@ -383,6 +395,15 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                     Log.d(TAG, "Detector returned status " + status);
 
                 visualize(mRgba, mFaces);
+
+                if (mFaces.rows() == 1) {
+                    mComplianceResult = ComplianceResult.COMPLIED;
+                } else if (mFaces.rows() > 1) {
+                    mComplianceResult = ComplianceResult.MULTIPLE_FACE;
+                } else if (mFaces.rows() <= 0) {
+                    mComplianceResult = ComplianceResult.NO_FACE;
+                }
+
             }
 
             if(nowCameraIndex!=CameraBridgeViewBase.CAMERA_ID_FRONT) {
@@ -417,6 +438,7 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
         }
     }
 
+
     public void startImageCropActivity(Bitmap image){
         Uri bmpUri = null;
         ///StringBuilder dstUriBuilder = null;
@@ -430,7 +452,9 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                 bmpUri = Utility.getImageUri(PhotoCaptureActivity.this, image);
                 Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
                 mResultBmp = Bitmap.createBitmap(image.getWidth(), image.getHeight(), conf);
-                dstUri = Utility.getImageUri(PhotoCaptureActivity.this,mResultBmp);
+                ////dstUri = Utility.getImageUri(PhotoCaptureActivity.this,mResultBmp);
+                dstUri = Uri.fromFile(new File(getCacheDir(), Utility.queryName(getContentResolver(), bmpUri)));
+
 
                 if(PhotoCaptureActivity.isDebug) {
                     Log.d(TAG, "Source Uri is : " + bmpUri.toString());
@@ -553,13 +577,25 @@ public class PhotoCaptureActivity extends CameraActivity implements CvCameraView
                 Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
                 Utils.bitmapToMat(bmp, nowImage, false);
-                ComplianceResult nowResult = checkCompliance(nowImage, flippedImage);
 
-                if (nowResult != ComplianceResult.COMPLIED) {
+                if(nowCameraIndex!=CameraBridgeViewBase.CAMERA_ID_FRONT) {
+                    Core.flip(nowImage, flippedImage, 1);
+                }else{
+                    Core.flip(nowImage, flippedImage, 0);
+                }
+
+                Core.rotate(flippedImage,flippedImage,Core.ROTATE_90_COUNTERCLOCKWISE);
+                ///ComplianceResult nowResult = checkCompliance(nowImage, flippedImage);
+
+                if(mComplianceResult==null){
+                    mComplianceResult = ComplianceResult.UNKNOWN_ERROR;
+                }
+
+                if (mComplianceResult != ComplianceResult.COMPLIED) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(PhotoCaptureActivity.this, nowResult.getComplianceTxt(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(PhotoCaptureActivity.this, mComplianceResult.getComplianceTxt(), Toast.LENGTH_LONG).show();
                         }
                     });
 
